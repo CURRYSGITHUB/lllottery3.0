@@ -5,7 +5,7 @@ import	java.awt.*;
 import	java.awt.event.*;
 
 public class Login {
-	// ±£´æµÇÂ¼Ê§°ÜµÄ´ÎÊı
+	// å­˜å‚¨ç™»å½•å¤±è´¥çš„æ¬¡æ•°
     static int num = 0;
     
     static String checkcode1;
@@ -20,37 +20,37 @@ public class Login {
 	static JPasswordField tpassword;
 	static ValidCode vcode;
 	
-    // JDBC Çı¶¯Ãû¼°Êı¾İ¿â URL
+    // JDBC é©±åŠ¨ååŠæ•°æ®åº“ URL
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";  
-    static final String DB_URL = "jdbc:mysql://localhost:3306/test1?serverTimezone=GMT%2B8";//urlÖ¸ÏòÒª·ÃÎÊµÄÊı¾İ¿âÃû
+    static final String DB_URL = "jdbc:mysql://localhost:3306/test1?serverTimezone=GMT%2B8";//urlæŒ‡å‘è¦è®¿é—®çš„æ•°æ®åº“å
  
-    // MySQLÅäÖÃÊ±µÄÓÃ»§ÃûÓëÃÜÂë
+    // MySQLé…ç½®æ—¶çš„ç”¨æˆ·åä¸å¯†ç 
     static final String USER = "root";
     static final String PASS = "123456";
     
 
     static int date1 = 0;
-    // µÇÂ¼·½·¨
-    // ¾²Ì¬·½·¨ÀïÃæ ĞèÒªÊ¹ÓÃ¾²Ì¬µÄ³ÉÔ±±äÁ¿
+    // ç™»å½•æ–¹æ³•
+    // é™æ€æ–¹æ³•é‡Œé¢ éœ€è¦ä½¿ç”¨é™æ€çš„æˆå‘˜å˜é‡
     public static void userLogin() {
         
     	frame = new JFrame();
-    	Login = new JButton("È·ÈÏµÇÂ¼");
+    	Login = new JButton("ç¡®è®¤ç™»å½•");
     	taccount = new JTextField();
     	
     	frame.setBounds(100, 100, 300, 300);
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().setLayout(null);//½«²¼¾Ö¹ÜÀíÆ÷ÖÃÎª¿Õ
+        frame.getContentPane().setLayout(null);//å°†å¸ƒå±€ç®¡ç†å™¨ç½®ä¸ºç©º
         frame.setVisible(true);
-        frame.setTitle("ÓÃ»§µÇÂ¼");
+        frame.setTitle("ç”¨æˆ·ç™»å½•");
         Login.setBounds(180, 198, 93, 23);
         Login.setBackground(Color.ORANGE);
         Login.addActionListener(new Login1());
         frame.getContentPane().add(Login);
         
-        laccount = new JLabel("ÓÃ»§Ãû£º");
-        lpassword = new JLabel("ÃÜÂë£º");
-        lpassword2 = new JLabel("ÑéÖ¤Âë£º");
+        laccount = new JLabel("ç”¨æˆ·åï¼š");
+        lpassword = new JLabel("å¯†ç ï¼š");
+        lpassword2 = new JLabel("éªŒè¯ç ï¼š");
         laccount.setBounds(100, 31, 60, 23);
         lpassword.setBounds(100, 73, 50, 23);
         lpassword2.setBounds(100, 121, 60, 23);
@@ -79,22 +79,22 @@ public class Login {
             User.password = String.valueOf(tpassword.getPassword());
             checkcode1 = checkcode.getText();
         	int m = 0;	
-        	//»ñÈ¡µ±Ç°ÏµÍ³ÈÕÆÚ
+        	//è·å–å½“å‰ç³»ç»Ÿæ—¥æœŸ
         	Calendar c = Calendar.getInstance();
         	int date2 = c.get(Calendar.DATE);
 
-            // ÅĞ¶ÏÆ¥ÅäµÇÂ¼ĞÅÏ¢
-            Connection conn = null;//ÉùÃ÷connection¶ÔÏó
-            Statement stmt = null;//´´½¨statementÀà¶ÔÏó£¬ÓÃÀ´Ö´ĞĞsqlÓï¾ä
+            // åˆ¤æ–­åŒ¹é…ç™»å½•ä¿¡æ¯
+            Connection conn = null;//å£°æ˜connectionå¯¹è±¡
+            Statement stmt = null;//åˆ›å»ºstatementç±»å¯¹è±¡ï¼Œç”¨æ¥æ‰§è¡Œsqlè¯­å¥
             if(date1!=date2) {
                 try{
-                     // ×¢²á JDBC Çı¶¯
+                     // æ³¨å†Œ JDBC é©±åŠ¨
                      Class.forName("com.mysql.cj.jdbc.Driver");
                  
-                     // ´ò¿ªÁ´½Ó
-                     conn = DriverManager.getConnection(DB_URL,USER,PASS);//getConnection·½·¨£¬Á¬½ÓMySQLÊı¾İ¿â
+                     // æ‰“å¼€é“¾æ¥
+                     conn = DriverManager.getConnection(DB_URL,USER,PASS);//getConnectionæ–¹æ³•ï¼Œè¿æ¥MySQLæ•°æ®åº“
                  
-                     // Ö´ĞĞ²éÑ¯
+                     // æ‰§è¡ŒæŸ¥è¯¢
                      stmt = conn.createStatement();
                      String sql;
                      sql = "SELECT account, password, number, isLogin, isWin FROM lottery";
@@ -109,29 +109,29 @@ public class Login {
                         	 User.number = rs.getInt("number");
                         	 User.isLogin = true;
                         	 User.isWin = rs.getBoolean("isWin");
-                        	 sql="update lottery set isLogin=1";//ĞŞ¸ÄµÇÂ¼×´Ì¬
-                        	 stmt.executeUpdate(sql);//Ö´ĞĞSQLÓï¾ä
+                        	 sql="update lottery set isLogin=1";//ä¿®æ”¹ç™»å½•çŠ¶æ€
+                        	 stmt.executeUpdate(sql);//æ‰§è¡ŒSQLè¯­å¥
                         	 frame.setVisible(false);
                         	 User.frame.setVisible(true);
                         	 break;
                          }
                      }
-                     // Íê³Éºó¹Ø±Õ
+                     // å®Œæˆåå…³é—­
                      rs.close();
                      stmt.close();
                      conn.close();
                  }catch(SQLException se){
-                     // ´¦Àí JDBC ´íÎó
+                     // å¤„ç† JDBC é”™è¯¯
                      se.printStackTrace();
                  }catch(Exception e){
-                     // ´¦Àí Class.forName ´íÎó
+                     // å¤„ç† Class.forName é”™è¯¯
                      e.printStackTrace();
                  }finally{
-                     // ¹Ø±Õ×ÊÔ´
+                     // å…³é—­èµ„æº
                      try{
                          if(stmt!=null) stmt.close();
                      }catch(SQLException se2){
-                     }// Ê²Ã´¶¼²»×ö
+                     }// ä»€ä¹ˆéƒ½ä¸åš
                      try{
                          if(conn!=null) conn.close();
                      }catch(SQLException se){
@@ -140,18 +140,18 @@ public class Login {
                  }
                  if(m == 0) {	
             		num++;
-            		// ÌáÊ¾ÓÃ»§»¹Ê£¼¸´Î»ú»á
-            	   JOptionPane.showMessageDialog(null, "ÕË»§»òÃÜÂë´íÎó£¬Äã»¹ÓĞ"+(3-num)+"´Î»ú»á");
-            		// ÅĞ¶ÏµÇÂ¼´íÁË¼¸´Î
+            		// æç¤ºç”¨æˆ·è¿˜å‰©å‡ æ¬¡æœºä¼š
+            	   JOptionPane.showMessageDialog(null, "è´¦æˆ·æˆ–å¯†ç é”™è¯¯ï¼Œä½ è¿˜æœ‰"+(3-num)+"æ¬¡æœºä¼š");
+            		// åˆ¤æ–­ç™»å½•é”™äº†å‡ æ¬¡
             		if (num != 3) {
-            			// ¼ÌĞøµÇÂ¼
+            			// ç»§ç»­ç™»å½•
             		   userLogin();
             		} else {
-            			// µÇÂ¼Ê§°Ü
-            			JOptionPane.showMessageDialog(null, "ÕË»§»òÃÜÂë´íÎó£¬½ñÈÕ»ú»áÒÑÓÃÍê");
-           			// ÖØÖÃ¼ÇÂ¼µÇÂ¼´ÎÊıµÄ±äÁ¿
-            			// ÊäÈë¿¨ºÅ´ÎÊıÖØÖÃ
-            			date1 = date2;//±ÜÃâµÚËÄ´ÎÊäÈë
+            			// ç™»å½•å¤±è´¥
+            			JOptionPane.showMessageDialog(null, "è´¦æˆ·æˆ–å¯†ç é”™è¯¯ï¼Œä»Šæ—¥æœºä¼šå·²ç”¨å®Œ");
+           			// é‡ç½®è®°å½•ç™»å½•æ¬¡æ•°çš„å˜é‡
+            			// è¾“å…¥å¡å·æ¬¡æ•°é‡ç½®
+            			date1 = date2;//é¿å…ç¬¬å››æ¬¡è¾“å…¥
             			num = 0;   
             		}
                  }
