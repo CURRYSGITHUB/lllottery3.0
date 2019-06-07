@@ -109,7 +109,7 @@ public class Login {
                         	 User.number = rs.getInt("number");
                         	 User.isLogin = true;
                         	 User.isWin = rs.getBoolean("isWin");
-                        	 sql="update lottery set isLogin=1";//修改登录状态
+                        	 sql="update lottery set isLogin=1 where account ='"+User.account+"'";//修改登录状态
                         	 stmt.executeUpdate(sql);//执行SQL语句
                         	 frame.setVisible(false);
                         	 User.frame.setVisible(true);
@@ -140,20 +140,20 @@ public class Login {
                  }
                  if(m == 0) {	
             		num++;
-            		// 提示用户还剩几次机会
-            	   JOptionPane.showMessageDialog(null, "账户或密码错误，你还有"+(3-num)+"次机会");
-            		// 判断登录错了几次
-            		if (num != 3) {
-            			// 继续登录
-            		   userLogin();
-            		} else {
-            			// 登录失败
-            			JOptionPane.showMessageDialog(null, "账户或密码错误，今日机会已用完");
-           			// 重置记录登录次数的变量
-            			// 输入卡号次数重置
-            			date1 = date2;//避免第四次输入
-            			num = 0;   
-            		}
+             		if (num != 3) {
+             			// 提示用户还剩几次机会
+                  	   JOptionPane.showMessageDialog(null, "账户、密码或验证码错误，你还有"+(3-num)+"次机会");
+             			// 继续登录
+                  	   frame.setVisible(false);
+             		   userLogin();
+             		} else {
+             			// 登录失败
+             			JOptionPane.showMessageDialog(null, "账户或密码错误，今日机会已用完");
+            			// 重置记录登录次数的变量
+             			// 输入卡号次数重置
+             			date1 = date2;//避免第四次输入
+             			num = 0;   
+             		}
                  }
             	}
 
