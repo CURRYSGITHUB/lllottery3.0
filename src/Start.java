@@ -4,9 +4,9 @@ import	java.awt.event.*;
 
 public class Start {
 	static JFrame frame;
-	JLabel label;
-	JButton b1,b2,b3;
-	public void cjStart () {
+	static JLabel label;
+	static JButton b1,b2,b3;
+	public static void cjStart () {
 		frame = new JFrame();//创建frame
 		//创建组件
 		label = new JLabel("Java 抽 奖 系 统");
@@ -41,19 +41,19 @@ public class Start {
         frame.getContentPane().add(b3);
 	}
 	//内部类
-	class Button1 implements ActionListener {
+	static class Button1 implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			frame.setVisible(false);
 			Login.userLogin();
 		}
 	}
-	class Button2 implements ActionListener {
+	static class Button2 implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			frame.setVisible(false);
 			Register.userRegister();
 		}
 	}
-	class Button3 implements ActionListener {
+	static class Button3 implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			frame.setVisible(false);
 			AdmiLogin.admiLogin();
