@@ -9,25 +9,25 @@ public class User extends Person{
 	public static boolean isWin = false;
 	public static int b;
 	
-	// JDBC Çı¶¯Ãû¼°Êı¾İ¿â URL
+	// JDBC é©±åŠ¨ååŠæ•°æ®åº“ URL
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";  
-    static final String DB_URL = "jdbc:mysql://localhost:3306/test1?serverTimezone=GMT%2B8";//urlÖ¸ÏòÒª·ÃÎÊµÄÊı¾İ¿âÃû
+    static final String DB_URL = "jdbc:mysql://localhost:3306/test1?serverTimezone=GMT%2B8";//urlæŒ‡å‘è¦è®¿é—®çš„æ•°æ®åº“å
  
-    // MySQLÅäÖÃÊ±µÄÓÃ»§ÃûÓëÃÜÂë
+    // MySQLé…ç½®æ—¶çš„ç”¨æˆ·åä¸å¯†ç 
     static final String USER = "root";
     static final String PASS = "123456";
     
 	static JFrame frame;
-	JButton b1,b2,b3;
-	public void swingCJ() {
+	static JButton b1,b2,b3;
+	public static void swingCJ() {
 		frame = new JFrame();
-		b1 = new JButton("¿ªÊ¼³é½±");
-		b2 = new JButton("²é¿´ÖĞ½±ĞÅÏ¢");
-		b3 = new JButton("ÍË³öµÇÂ¼");
+		b1 = new JButton("å¼€å§‹æŠ½å¥–");
+		b2 = new JButton("æŸ¥çœ‹ä¸­å¥–ä¿¡æ¯");
+		b3 = new JButton("é€€å‡ºç™»å½•");
 		
 		frame.setBounds(100, 100, 300, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().setLayout(null);//½«²¼¾Ö¹ÜÀíÆ÷ÖÃÎª¿Õ
+        frame.getContentPane().setLayout(null);//å°†å¸ƒå±€ç®¡ç†å™¨ç½®ä¸ºç©º
         frame.setVisible(true);
         
         b1.setBounds(180, 198, 93, 23);
@@ -45,74 +45,74 @@ public class User extends Person{
         
     	   
 	}
-	class B1 implements ActionListener{
+	static class B1 implements ActionListener{
 		public void actionPerformed(ActionEvent event) {
 			Play.userCJ();
 		}
 	}     
-	class B2 implements ActionListener{
+	static class B2 implements ActionListener{
 		public void actionPerformed(ActionEvent event) {
 			int num = 0;
 			frame = new JFrame();
 			frame.setBounds(100, 100, 300, 300);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	        frame.getContentPane().setLayout(null);//½«²¼¾Ö¹ÜÀíÆ÷ÖÃÎª¿Õ
+	        frame.getContentPane().setLayout(null);//å°†å¸ƒå±€ç®¡ç†å™¨ç½®ä¸ºç©º
 	        frame.setVisible(true);
-	        frame.setTitle("ÖĞ½±ĞÅÏ¢²éÑ¯");
+	        frame.setTitle("ä¸­å¥–ä¿¡æ¯æŸ¥è¯¢");
 	        JLabel CJinfo;
 
-		    Connection conn = null;//ÉùÃ÷connection¶ÔÏó
-		    Statement stmt = null;//´´½¨statementÀà¶ÔÏó£¬ÓÃÀ´Ö´ĞĞsqlÓï¾ä
+		    Connection conn = null;//å£°æ˜connectionå¯¹è±¡
+		    Statement stmt = null;//åˆ›å»ºstatementç±»å¯¹è±¡ï¼Œç”¨æ¥æ‰§è¡Œsqlè¯­å¥
 		    try{
-		            // ×¢²á JDBC Çı¶¯
+		            // æ³¨å†Œ JDBC é©±åŠ¨
 		            Class.forName("com.mysql.cj.jdbc.Driver");
 		        
-		            // ´ò¿ªÁ´½Ó
-		            conn = DriverManager.getConnection(DB_URL,USER,PASS);//getConnection·½·¨£¬Á¬½ÓMySQLÊı¾İ¿â
+		            // æ‰“å¼€é“¾æ¥
+		            conn = DriverManager.getConnection(DB_URL,USER,PASS);//getConnectionæ–¹æ³•ï¼Œè¿æ¥MySQLæ•°æ®åº“
 		        
-		            // Ö´ĞĞ²éÑ¯
+		            // æ‰§è¡ŒæŸ¥è¯¢
 		            stmt = conn.createStatement();
 		            String sql;
 		            sql = "SELECT account, number, FROM lottery";
 		            ResultSet rs = stmt.executeQuery(sql);
 		        
-		            // Õ¹¿ª½á¹û¼¯Êı¾İ¿â
+		            // å±•å¼€ç»“æœé›†æ•°æ®åº“
 		            while(rs.next()){
-		                // Í¨¹ı×Ö¶Î¼ìË÷
+		                // é€šè¿‡å­—æ®µæ£€ç´¢
 		                String account = rs.getString("account");
 		                num = rs.getInt("number");
-                        //ÕÒµ½ÓÃ»§ĞÅÏ¢
+                        //æ‰¾åˆ°ç”¨æˆ·ä¿¡æ¯
 		                if(User.account == account) {
 		                	break;
 		                }
 		            }
 					if(num == Play.cardNumber) {
 		                 
-		                 CJinfo = new JLabel("¹§Ï²Äú£¬ÖĞ½±À²£¡");
+		                 CJinfo = new JLabel("æ­å–œæ‚¨ï¼Œä¸­å¥–å•¦ï¼");
 		                 CJinfo.setBounds(140, 31, 34, 23);
 		                 frame.getContentPane().add(CJinfo);
 		             }
 		             else {
-		            	 CJinfo = new JLabel("ºÜÒÅº¶£¬ÄúÎ´ÖĞ½±£¡");
+		            	 CJinfo = new JLabel("å¾ˆé—æ†¾ï¼Œæ‚¨æœªä¸­å¥–ï¼");
 		            	 CJinfo.setBounds(140, 31, 34, 23);
 		                 frame.getContentPane().add(CJinfo);
 		             }
-		            // Íê³Éºó¹Ø±Õ
+		            // å®Œæˆåå…³é—­
 		            rs.close();
 		            stmt.close();
 		            conn.close();
 		        }catch(SQLException se){
-		            // ´¦Àí JDBC ´íÎó
+		            // å¤„ç† JDBC é”™è¯¯
 		            se.printStackTrace();
 		        }catch(Exception e){
-		            // ´¦Àí Class.forName ´íÎó
+		            // å¤„ç† Class.forName é”™è¯¯
 		            e.printStackTrace();
 		        }finally{
-		            // ¹Ø±Õ×ÊÔ´
+		            // å…³é—­èµ„æº
 		            try{
 		                if(stmt!=null) stmt.close();
 		            }catch(SQLException se2){
-		            }// Ê²Ã´¶¼²»×ö
+		            }// ä»€ä¹ˆéƒ½ä¸åš
 		            try{
 		                if(conn!=null) conn.close();
 		            }catch(SQLException se){
@@ -123,27 +123,27 @@ public class User extends Person{
 		}
 			
 	}     
-	class B3 implements ActionListener{
+	static class B3 implements ActionListener{
 		public void actionPerformed(ActionEvent event) {
 			
-			Connection conn = null;//ÉùÃ÷connection¶ÔÏó
-		    Statement stmt = null;//´´½¨statementÀà¶ÔÏó£¬ÓÃÀ´Ö´ĞĞsqlÓï¾ä
+			Connection conn = null;//å£°æ˜connectionå¯¹è±¡
+		    Statement stmt = null;//åˆ›å»ºstatementç±»å¯¹è±¡ï¼Œç”¨æ¥æ‰§è¡Œsqlè¯­å¥
 		    try{
-		            // ×¢²á JDBC Çı¶¯
+		            // æ³¨å†Œ JDBC é©±åŠ¨
 		            Class.forName("com.mysql.cj.jdbc.Driver");
 		        
-		            // ´ò¿ªÁ´½Ó
-		            conn = DriverManager.getConnection(DB_URL,USER,PASS);//getConnection·½·¨£¬Á¬½ÓMySQLÊı¾İ¿â
+		            // æ‰“å¼€é“¾æ¥
+		            conn = DriverManager.getConnection(DB_URL,USER,PASS);//getConnectionæ–¹æ³•ï¼Œè¿æ¥MySQLæ•°æ®åº“
 		        
-		            // Ö´ĞĞ²éÑ¯
+		            // æ‰§è¡ŒæŸ¥è¯¢
 		            stmt = conn.createStatement();
 		            String sql;
 		            sql = "SELECT account, isLogin, FROM lottery";
 		            ResultSet rs = stmt.executeQuery(sql);
 		        
-		            // Õ¹¿ª½á¹û¼¯Êı¾İ¿â
+		            // å±•å¼€ç»“æœé›†æ•°æ®åº“
 		            while(rs.next()){
-		                // Í¨¹ı×Ö¶Î¼ìË÷
+		                // é€šè¿‡å­—æ®µæ£€ç´¢
 		                String account = rs.getString("account");
 		                @SuppressWarnings("unused")
 						boolean isLogin = rs.getBoolean("isLogin");
@@ -154,22 +154,22 @@ public class User extends Person{
 		                }
 		            }
 
-		            // Íê³Éºó¹Ø±Õ
+		            // å®Œæˆåå…³é—­
 		            rs.close();
 		            stmt.close();
 		            conn.close();
 		        }catch(SQLException se){
-		            // ´¦Àí JDBC ´íÎó
+		            // å¤„ç† JDBC é”™è¯¯
 		            se.printStackTrace();
 		        }catch(Exception e){
-		            // ´¦Àí Class.forName ´íÎó
+		            // å¤„ç† Class.forName é”™è¯¯
 		            e.printStackTrace();
 		        }finally{
-		            // ¹Ø±Õ×ÊÔ´
+		            // å…³é—­èµ„æº
 		            try{
 		                if(stmt!=null) stmt.close();
 		            }catch(SQLException se2){
-		            }// Ê²Ã´¶¼²»×ö
+		            }// ä»€ä¹ˆéƒ½ä¸åš
 		            try{
 		                if(conn!=null) conn.close();
 		            }catch(SQLException se){
