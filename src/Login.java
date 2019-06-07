@@ -88,7 +88,7 @@ public class Login {
         frame.getContentPane().add(checkcode);
         
         vcode = new ValidCode2();
-		vcode.setBounds(480, 367, 150, 40);
+		vcode.setBounds(650, 372, 150, 40);
 		frame.add(vcode);
 		
 		
