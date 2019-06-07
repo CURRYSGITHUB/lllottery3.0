@@ -6,49 +6,65 @@ import	java.awt.event.*;
 public class Register {
 	static JFrame frame;
 	static JButton register,out;
-	static JLabel laccount,lpassword,lpassword2;
+	static JLabel laccount,lpassword,lpassword2,ltitle;
 	static JTextField taccount;
 	static JPasswordField tpassword,tpassword2;
 	
 	public static void userRegister(){
 		frame = new JFrame();
-		register = new JButton("×¢²á");
-		out = new JButton("·µ»Ø");
-		laccount = new JLabel("ÓÃ»§Ãû");
-        lpassword = new JLabel("ÃÜÂë");
-        lpassword2 = new JLabel("È·ÈÏÃÜÂë");
+		Font font1 = new Font("serif",Font.BOLD,24);
+		register = new JButton("æ³¨ å†Œ");
+		register.setFont(font1);
+		out = new JButton("è¿” å›");
+		out.setFont(font1);
+		Font font2 = new Font("serif",Font.BOLD,26);
+		laccount = new JLabel("ç”¨ æˆ· å");
+        lpassword = new JLabel("å¯†      ç ");
+        lpassword2 = new JLabel("ç¡®è®¤å¯†ç ");
+        laccount.setFont(font2);
+        lpassword.setFont(font2);
+        lpassword2.setFont(font2);
+        ltitle = new JLabel("ç”¨  æˆ·  æ³¨  å†Œ");
+        Font font3 = new Font("å¾®è½¯é›…é»‘",Font.BOLD,48);
+        ltitle.setFont(font3);
         taccount = new JTextField();
         tpassword = new JPasswordField();
         tpassword2 = new JPasswordField();
+        taccount.setFont(font1);
+        tpassword.setFont(font1);
+        tpassword2.setFont(font1);
         
-		frame.setBounds(100, 100, 300, 300);
+		frame.setBounds(100, 100, 1000, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().setLayout(null);//½«²¼¾Ö¹ÜÀíÆ÷ÖÃÎª¿Õ
+        frame.getContentPane().setLayout(null);//å°†å¸ƒå±€ç®¡ç†å™¨ç½®ä¸ºç©º
         frame.setVisible(true);
-        frame.setTitle("×¢²á");
+        frame.setTitle("æ³¨å†Œ");
         
-        register.setBounds(180, 198, 93, 23);
+        register.setBounds(500, 500, 232, 57);
         register.setBackground(Color.ORANGE);
         register.addActionListener(new Button());
-        out.setBounds(156, 198, 93, 23);
+        out.setBounds(200, 500, 232, 57);
         out.setBackground(Color.ORANGE);
         out.addActionListener(new Out());
         frame.getContentPane().add(register);
         frame.getContentPane().add(out);
         
-        laccount.setBounds(140, 31, 34, 23);
-        lpassword.setBounds(140, 73, 34, 23);
-        lpassword2.setBounds(140, 121, 34, 23);
+        laccount.setBounds(295, 200, 100, 57);
+        lpassword.setBounds(295, 281, 100, 57);
+        lpassword2.setBounds(295, 362, 150, 57);
+        ltitle.setBounds(330,70,280,80);
         frame.getContentPane().add(laccount);
         frame.getContentPane().add(lpassword);
         frame.getContentPane().add(lpassword2);
+        frame.getContentPane().add(ltitle);
          
-        taccount.setBounds(182, 31, 79, 21);
-        tpassword.setBounds(182, 73, 79, 21);
-        tpassword2.setBounds(182, 123, 79, 21);
+        taccount.setBounds(420, 205, 197, 52);
+        tpassword.setBounds(420, 286, 197, 52);
+        tpassword2.setBounds(420, 367, 197, 52);
         frame.getContentPane().add(taccount);
         frame.getContentPane().add(tpassword);
         frame.getContentPane().add(tpassword2);
+        
         
 		
 	}
@@ -59,7 +75,7 @@ public class Register {
 	}
 	static class Button implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			// ½ÓÊÕÓÃ»§ĞÅÏ¢
+			// æ¥æ”¶ç”¨æˆ·ä¿¡æ¯
 	        User.account = taccount.getText();
 	        String m = String.valueOf(tpassword.getPassword());
 	        String n = String.valueOf(tpassword2.getPassword());
@@ -70,13 +86,13 @@ public class Register {
 	        User.isLogin = false;
 	        User.isWin = false;
 	        int k = 0;
-	        // ´æ´¢µ½Êı¾İ¿â
+	        // å­˜å‚¨åˆ°æ•°æ®åº“
 	        final String DB_URL = "jdbc:mysql://localhost:3306/test1?serverTimezone=GMT%2B8";
 		    final String USER = "root";
 		    final String PASS = "123456";
 		    
 		    try {
-				// »ñÈ¡Êı¾İ¿âµÄÁ¬½Ó
+				// è·å–æ•°æ®åº“çš„è¿æ¥
 				Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
 				Statement stmt = conn.createStatement();
 				String sql = "SELECT account, password, number, isLogin, isWin FROM lottery";
@@ -88,31 +104,30 @@ public class Register {
 	                	}
 	            	}
 	            if(k!=0) {
-	            	JOptionPane.showMessageDialog(null, "ÓÃ»§ÃûÒÑ´æÔÚ£¬ÇëÖØĞÂÊäÈë",null,JOptionPane.ERROR_MESSAGE);
+	            	JOptionPane.showMessageDialog(null, "ç”¨æˆ·åå·²å­˜åœ¨ï¼Œè¯·é‡æ–°è¾“å…¥",null,JOptionPane.ERROR_MESSAGE);
 	            	clearText();
 	            }else {
-	            	// ÉèÖÃSQL¹æÔò£¬Êı¾İÓÉÓÚ»¹²»ÖªµÀÏÈÓÃ£¿´úÌæ
+	            	// è®¾ç½®SQLè§„åˆ™ï¼Œæ•°æ®ç”±äºè¿˜ä¸çŸ¥é“å…ˆç”¨ï¼Ÿä»£æ›¿
 	    			sql = "INSERT INTO lottery(account,password,number,isLogin,isWin) VALUES (?,?,?,?,?)";
-	    			// Ô¤´¦ÀísqlÓï¾ä
+	    			// é¢„å¤„ç†sqlè¯­å¥
 	    			PreparedStatement presta = conn.prepareStatement(sql);
-	    			// ÉèÖÃsqlÓï¾äÖĞµÄvaluesÖµ
+	    			// è®¾ç½®sqlè¯­å¥ä¸­çš„valueså€¼
 	    			presta.setString(1, User.account);
 	    			presta.setString(2, User.password);
 	    			presta.setInt(3, User.number);
 	    			presta.setBoolean(4, User.isLogin);
 	    			presta.setBoolean(5, User.isWin );
-	    			// Ö´ĞĞSQLÓï¾ä£¬ÊµÏÖÊı¾İÌí¼Ó
+	    			// æ‰§è¡ŒSQLè¯­å¥ï¼Œå®ç°æ•°æ®æ·»åŠ 
 	    			presta.execute();
-	    			//  ´òÓ¡×¢²áĞÅÏ¢
-	    		    JOptionPane.showMessageDialog(null, "×¢²á³É¹¦£¡\nÓÃ»§Ãû£º"+User.account+"\n³é½±ºÅÂë£º"+User.number); 
+	    			//  æ‰“å°æ³¨å†Œä¿¡æ¯
+	    		    JOptionPane.showMessageDialog(null, "æ³¨å†ŒæˆåŠŸï¼\nç”¨æˆ·åï¼š"+User.account+"\næŠ½å¥–å·ç ï¼š"+User.number); 
 	    		    frame.setVisible(false);
+			    Start.frame.setVisible(true);
 	            }
 	} 
 		    catch (SQLException e1) {
 					e1.printStackTrace();
 				 }
-			frame.setVisible(false);
-			Register.userRegister();
 		}
 	}
 	static class Out implements ActionListener{
