@@ -12,10 +12,11 @@ public class Login {
     
     
 	static JFrame frame;
-	static JButton Login;
+	static JButton Login,out;
 	static JLabel laccount;
 	static JLabel lpassword;
 	static JLabel lpassword2;
+	static JLabel ltitle;
 	static JTextField taccount,checkcode;
 	static JPasswordField tpassword;
 	static ValidCode vcode;
@@ -35,40 +36,59 @@ public class Login {
     public static void userLogin() {
         
     	frame = new JFrame();
-    	Login = new JButton("确认登录");
-    	taccount = new JTextField();
-    	
-    	frame.setBounds(100, 100, 300, 300);
+    	frame.setBounds(100, 100, 1000, 800);
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);//将布局管理器置为空
         frame.setVisible(true);
-        frame.setTitle("用户登录");
-        Login.setBounds(180, 198, 93, 23);
-        Login.setBackground(Color.ORANGE);
-        Login.addActionListener(new Login1());
-        frame.getContentPane().add(Login);
         
-        laccount = new JLabel("用户名：");
-        lpassword = new JLabel("密码：");
-        lpassword2 = new JLabel("验证码：");
-        laccount.setBounds(100, 31, 60, 23);
-        lpassword.setBounds(100, 73, 50, 23);
-        lpassword2.setBounds(100, 121, 60, 23);
+        Font font1 = new Font("serif",Font.BOLD,24);
+    	Login = new JButton("确 认 登 录");
+    	out = new JButton("返 回");
+    	Login.setFont(font1);
+    	out.setFont(font1);
+        Login.setBounds(500, 500, 232, 57);
+        Login.setBackground(Color.ORANGE);
+        out.setBounds(200, 500, 232, 57);
+        out.setBackground(Color.ORANGE);
+        Login.addActionListener(new Login1());
+        out.addActionListener(new Out());
+        frame.getContentPane().add(Login);
+        frame.getContentPane().add(out);
+       
+        Font font2 = new Font("serif",Font.BOLD,26);
+        Font font3 = new Font("微软雅黑",Font.BOLD,48);
+        laccount = new JLabel("用 户 名：");
+        lpassword = new JLabel("密     码：");
+        lpassword2 = new JLabel("验 证 码：");
+        ltitle = new JLabel("用  户  登  录");
+        laccount.setFont(font2);
+        lpassword.setFont(font2);
+        lpassword2.setFont(font2);
+        ltitle.setFont(font3);
+        laccount.setBounds(295, 200, 150, 57);
+        lpassword.setBounds(295, 281, 150, 57);
+        lpassword2.setBounds(295, 362, 150, 57);
+        ltitle.setBounds(330,70,280,80);
         frame.getContentPane().add(laccount);
         frame.getContentPane().add(lpassword);
         frame.getContentPane().add(lpassword2);
+        frame.getContentPane().add(ltitle);
         
         tpassword = new JPasswordField();
+    	taccount = new JTextField();
         checkcode = new JTextField();
-        taccount.setBounds(182, 31, 79, 21);
-        tpassword.setBounds(182, 73, 79, 21);
-        checkcode.setBounds(182, 123, 79, 21);
+        taccount.setBounds(420, 205, 197, 52);
+        tpassword.setBounds(420, 286, 197, 52);
+        checkcode.setBounds(420, 367, 197, 52);
+        taccount.setFont(font2);
+        tpassword.setFont(font2);
+        checkcode.setFont(font2);
         frame.getContentPane().add(taccount);
         frame.getContentPane().add(tpassword);
         frame.getContentPane().add(checkcode);
         
-        vcode = new ValidCode();
-		vcode.setBounds(400, 190, 80, 40);
+        vcode = new ValidCode2();
+		vcode.setBounds(480, 367, 150, 40);
 		frame.add(vcode);
 		
 		
@@ -160,6 +180,12 @@ public class Login {
      	}
 
     }
+	static class Out implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			frame.setVisible(false);
+			Start2.frame.setVisible(true);
+		}
+	}
     public static boolean isValidCodeRight() {
     	 
 		if (checkcode == null) {
