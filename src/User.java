@@ -130,32 +130,18 @@ public class User extends Person{
 		    Statement stmt = null;//创建statement类对象，用来执行sql语句
 		    try{
 		            // 注册 JDBC 驱动
-		            Class.forName("com.mysql.cj.jdbc.Driver");
+		            Class.forName("com.mysql.jdbc.Driver");
 		        
 		            // 打开链接
 		            conn = DriverManager.getConnection(DB_URL,USER,PASS);//getConnection方法，连接MySQL数据库
 		        
 		            // 执行查询
-		            stmt = conn.createStatement();
+		            stmt = conn.createStatement(); 
 		            String sql;
-		            sql = "SELECT account, isLogin, FROM lottery";
-		            ResultSet rs = stmt.executeQuery(sql);
-		        
-		            // 展开结果集数据库
-		            while(rs.next()){
-		                // 通过字段检索
-		                String account = rs.getString("account");
-		                @SuppressWarnings("unused")
-						boolean isLogin = rs.getBoolean("isLogin");
-		                
-		                if(User.account == account) {
-		                	isLogin = false;
-		                	break;
-		                }
-		            }
+		            sql="update lottery set isLogin=0 where account ='"+User2.account+"'";//修改登录状态
+               	    stmt.executeUpdate(sql);//执行SQL语句
 
 		            // 完成后关闭
-		            rs.close();
 		            stmt.close();
 		            conn.close();
 		        }catch(SQLException se){
@@ -176,6 +162,9 @@ public class User extends Person{
 		                se.printStackTrace();
 		            }
 		        }
+		    JOptionPane.showMessageDialog(null, User2.account+"\n退出登录！"); 
+		    User2.frame.setVisible(false);
+		    Start2.cjStart();
 				    
 		}
 		}
