@@ -4,36 +4,43 @@ import	java.awt.event.*;
 
 public class Start {
 	static JFrame frame;
-	JPanel panel;
 	JLabel label;
 	JButton b1,b2,b3;
 	public void cjStart () {
-		frame = new JFrame();//´´½¨frame
-		//´´½¨×é¼ş
-		panel = new JPanel();
-		label = new JLabel("Java³é½±ÏµÍ³");
-		Font bigFont = new Font("serif",Font.BOLD,28);
-		label.setFont(bigFont);//ÉèÖÃlabel×ÖÌå´óĞ¡
-		b1 = new JButton("ÓÃ»§µÇÂ¼");
-		b2 = new JButton("ÓÃ»§×¢²á");
-		b3 = new JButton("¹ÜÀíÔ±µÇÂ¼");
-		//ÉèÖÃ¼àÌı,Ïò°´Å¥×¢²á
+		frame = new JFrame();//åˆ›å»ºframe
+		//åˆ›å»ºç»„ä»¶
+		label = new JLabel("Java æŠ½ å¥– ç³» ç»Ÿ");
+		Font font1 = new Font("å¾®è½¯é›…é»‘",Font.BOLD,44);
+		label.setFont(font1);//è®¾ç½®labelå­—ä½“å¤§å°
+		label.setBounds(300,80,350,100);
+		b1 = new JButton("ç”¨ æˆ· ç™» å½•");
+		b2 = new JButton("ç”¨ æˆ· æ³¨ å†Œ");
+		b3 = new JButton("ç®¡ ç† å‘˜ ç™» å½•");
+		//è®¾ç½®ç›‘å¬,å‘æŒ‰é’®æ³¨å†Œ
 		b1.addActionListener(new Button1());
 		b2.addActionListener(new Button2());
 		b3.addActionListener(new Button3());
-		//½«°´Å¥Ìí¼Óµ½Ãæ°å
-		panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));//¸ü»»²¼¾Ö¹ÜÀíÆ÷
-		panel.add(b1);
-		panel.add(b2);
-		panel.add(b3);
 		
-		frame.getContentPane().add(BorderLayout.CENTER,panel);//°ÑÃæ°åÌí¼Óµ½frameµÄpaneÉÏ
-		frame.getContentPane().add(BorderLayout.NORTH,label);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//ÔÚwindow¹Ø±ÕÊ±½áÊø³ÌĞò
-		frame.setSize(300,300);//Éè¶¨frame´óĞ¡
-		frame.setVisible(true);//ÏÔÊ¾frame
+		Font font2 = new Font("serif",Font.BOLD,24);
+		b1.setFont(font2);
+		b2.setFont(font2);
+		b3.setFont(font2);
+		b1.setBounds(350, 240, 197, 52);
+		b2.setBounds(350, 331, 197, 52);
+        b3.setBounds(350, 422, 197, 52);
+
+		
+		frame.setBounds(100, 100, 1000, 800);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setLayout(null);//å°†å¸ƒå±€ç®¡ç†å™¨ç½®ä¸ºç©º
+        frame.setVisible(true);
+        
+        frame.getContentPane().add(label);
+        frame.getContentPane().add(b1);
+        frame.getContentPane().add(b2);
+        frame.getContentPane().add(b3);
 	}
-	//ÄÚ²¿Àà
+	//å†…éƒ¨ç±»
 	class Button1 implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			frame.setVisible(false);
