@@ -112,7 +112,7 @@ public class Login {
                         	 sql="update lottery set isLogin=1 where account ='"+User.account+"'";//修改登录状态
                         	 stmt.executeUpdate(sql);//执行SQL语句
                         	 frame.setVisible(false);
-                        	 User.frame.setVisible(true);
+                        	 User.swingCJ();
                         	 break;
                          }
                      }
