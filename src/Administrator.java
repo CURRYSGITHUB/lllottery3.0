@@ -11,14 +11,14 @@ import javax.swing.JOptionPane;
 
 
 public class Administrator extends Person{
-		// JDBC Çı¶¯Ãû¼°Êı¾İ¿â URL
+		// JDBC é©±åŠ¨ååŠæ•°æ®åº“ URL
 	    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";  
-	    static final String DB_URL = "jdbc:mysql://localhost:3306/test1?serverTimezone=GMT%2B8";//urlÖ¸ÏòÒª·ÃÎÊµÄÊı¾İ¿âÃû
+	    static final String DB_URL = "jdbc:mysql://localhost:3306/test1?serverTimezone=GMT%2B8";//urlæŒ‡å‘è¦è®¿é—®çš„æ•°æ®åº“å
 	 
-	    // MySQLÅäÖÃÊ±µÄÓÃ»§ÃûÓëÃÜÂë
+	    // MySQLé…ç½®æ—¶çš„ç”¨æˆ·åä¸å¯†ç 
 	    static final String USER = "root";
 	    static final String PASS = "123456";
-	    //ÏÔÊ¾ÓÃ»§ĞÅÏ¢
+	    //æ˜¾ç¤ºç”¨æˆ·ä¿¡æ¯
 	    static double rate = 0;
 	    
 	    static JFrame frame;
@@ -26,15 +26,15 @@ public class Administrator extends Person{
 	    
 	    public static void swingCJ() {
 			frame = new JFrame();
-			b1 = new JButton("²é¿´ÓÃ»§ĞÅÏ¢");
-			b2 = new JButton("²é¿´ÖĞ½±ÓÃ»§");
-			b3 = new JButton("ÉèÖÃÖĞ½±¸ÅÂÊ");
-			b4 = new JButton("ÏÔÊ¾ÖĞ½±¸ÅÂÊ");
-			b0 = new JButton("ÍË³öµÇÂ½");
+			b1 = new JButton("æŸ¥çœ‹ç”¨æˆ·ä¿¡æ¯");
+			b2 = new JButton("æŸ¥çœ‹ä¸­å¥–ç”¨æˆ·");
+			b3 = new JButton("è®¾ç½®ä¸­å¥–æ¦‚ç‡");
+			b4 = new JButton("æ˜¾ç¤ºä¸­å¥–æ¦‚ç‡");
+			b0 = new JButton("é€€å‡ºç™»é™†");
 			
 			frame.setBounds(100, 100, 300, 300);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	        frame.getContentPane().setLayout(null);//½«²¼¾Ö¹ÜÀíÆ÷ÖÃÎª¿Õ
+	        frame.getContentPane().setLayout(null);//å°†å¸ƒå±€ç®¡ç†å™¨ç½®ä¸ºç©º
 	        frame.setVisible(true);
 	        
 	        b1.setBounds(1000, 198, 200, 23);
@@ -60,67 +60,67 @@ public class Administrator extends Person{
 	        
 	    	   
 		}	    
-	    //²é¿´ËùÓĞÓÃ»§
+	    //æŸ¥çœ‹æ‰€æœ‰ç”¨æˆ·
 static class  B1 implements ActionListener{
 	    	public  void userInfo() {	    		
 	    		frame = new JFrame();
 				frame.setBounds(100, 100, 300, 300);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		        frame.getContentPane().setLayout(null);//½«²¼¾Ö¹ÜÀíÆ÷ÖÃÎª¿Õ
+		        frame.getContentPane().setLayout(null);//å°†å¸ƒå±€ç®¡ç†å™¨ç½®ä¸ºç©º
 		        frame.setVisible(true);
-		        frame.setTitle("È«ÌåÓÃ»§ĞÅÏ¢");		        
+		        frame.setTitle("å…¨ä½“ç”¨æˆ·ä¿¡æ¯");		        
 		        JLabel label = new JLabel();
 		        
-		        JButton b0 = new JButton("·µ»Ø");		   
+		        JButton b0 = new JButton("è¿”å›");		   
 		        b0.setBounds(180, 198, 93, 23);
 		        b0.setBackground(Color.ORANGE);
 		        b0.addActionListener(new B0());
 		        
-		        Connection conn = null;//ÉùÃ÷connection¶ÔÏó
-		        Statement stmt = null;//´´½¨statementÀà¶ÔÏó£¬ÓÃÀ´Ö´ĞĞsqlÓï¾ä
+		        Connection conn = null;//å£°æ˜connectionå¯¹è±¡
+		        Statement stmt = null;//åˆ›å»ºstatementç±»å¯¹è±¡ï¼Œç”¨æ¥æ‰§è¡Œsqlè¯­å¥
 		        try{
-		            // ×¢²á JDBC Çı¶¯
+		            // æ³¨å†Œ JDBC é©±åŠ¨
 		            Class.forName("com.mysql.cj.jdbc.Driver");
 		        
-		            // ´ò¿ªÁ´½Ó
-		            conn = DriverManager.getConnection(DB_URL,USER,PASS);//getConnection·½·¨£¬Á¬½ÓMySQLÊı¾İ¿â
+		            // æ‰“å¼€é“¾æ¥
+		            conn = DriverManager.getConnection(DB_URL,USER,PASS);//getConnectionæ–¹æ³•ï¼Œè¿æ¥MySQLæ•°æ®åº“
 		        
-		            // Ö´ĞĞ²éÑ¯
+		            // æ‰§è¡ŒæŸ¥è¯¢
 		            stmt = conn.createStatement();
 		            String sql;
 		            sql = "SELECT account, number, isLogin FROM administrator";
 		            ResultSet rs = stmt.executeQuery(sql);
 		        
-		            // Õ¹¿ª½á¹û¼¯Êı¾İ¿â;Ìí¼Ó×¢²á¹ÜÀíÔ±Àà£¿
+		            // å±•å¼€ç»“æœé›†æ•°æ®åº“;æ·»åŠ æ³¨å†Œç®¡ç†å‘˜ç±»ï¼Ÿ
 		            while(rs.next()){
-		                // Í¨¹ı×Ö¶Î¼ìË÷
+		                // é€šè¿‡å­—æ®µæ£€ç´¢
 		                int number  = rs.getInt("number");
 		                String account = rs.getString("account");
 		                boolean isLogin = rs.getBoolean("isLogin");
 		    
-		                // Êä³öÊı¾İ
+		                // è¾“å‡ºæ•°æ®
 		                label.setText("Account " + account);
 		                label.setText("Number " + number);
-		                label.setText(", ÊÇ·ñµÇÂ¼: " + isLogin);
+		                label.setText(", æ˜¯å¦ç™»å½•: " + isLogin);
 		                label.setText("\n");
 		            }
-		            // Íê³Éºó¹Ø±Õ
+		            // å®Œæˆåå…³é—­
 		            rs.close();
 		            stmt.close();
 		            conn.close();
 		        }catch(SQLException se){
-		            // ´¦Àí JDBC ´íÎó
+		            // å¤„ç† JDBC é”™è¯¯
 		            se.printStackTrace();
 		        }catch(Exception e){
-		            // ´¦Àí Class.forName ´íÎó
+		            // å¤„ç† Class.forName é”™è¯¯
 		            e.printStackTrace();
 		        }finally{
-		            // ¹Ø±Õ×ÊÔ´
+		            // å…³é—­èµ„æº
 		            try{
 		                if(stmt!=null) stmt.close();
 		            }catch(SQLException se2){
 		            	
-		            }// Ê²Ã´¶¼²»×ö
+		            }// ä»€ä¹ˆéƒ½ä¸åš
 		            try{
 		                if(conn!=null) conn.close();
 		            }catch(SQLException se){
@@ -136,59 +136,59 @@ static class  B1 implements ActionListener{
 			}	    
         }
 
-	    //²é¿´ÖĞ½±ÓÃ»§
+	    //æŸ¥çœ‹ä¸­å¥–ç”¨æˆ·
 static class B2 implements ActionListener{	    	
 	    	public void announce()  {
 	    		frame = new JFrame();
 				frame.setBounds(100, 100, 300, 300);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		        frame.getContentPane().setLayout(null);//½«²¼¾Ö¹ÜÀíÆ÷ÖÃÎª¿Õ
+		        frame.getContentPane().setLayout(null);//å°†å¸ƒå±€ç®¡ç†å™¨ç½®ä¸ºç©º
 		        frame.setVisible(true);
-		        frame.setTitle("ÖĞ½±ÓÃ»§ĞÅÏ¢");		        
+		        frame.setTitle("ä¸­å¥–ç”¨æˆ·ä¿¡æ¯");		        
 		        JLabel label = new JLabel();
 		        
-		        JButton b0 = new JButton("·µ»Ø");		   
+		        JButton b0 = new JButton("è¿”å›");		   
 		        b0.setBounds(180, 198, 93, 23);
 		        b0.setBackground(Color.ORANGE);
 		        b0.addActionListener(new B0());
 		        
-		    	 Connection conn = null;//ÉùÃ÷connection¶ÔÏó
-			     Statement stmt = null;//´´½¨statementÀà¶ÔÏó£¬ÓÃÀ´Ö´ĞĞsqlÓï¾ä
+		    	 Connection conn = null;//å£°æ˜connectionå¯¹è±¡
+			     Statement stmt = null;//åˆ›å»ºstatementç±»å¯¹è±¡ï¼Œç”¨æ¥æ‰§è¡Œsqlè¯­å¥
 		    	try{
-		            // ×¢²á JDBC Çı¶¯
+		            // æ³¨å†Œ JDBC é©±åŠ¨
 		            Class.forName("com.mysql.cj.jdbc.Driver");
 		        
-		            // ´ò¿ªÁ´½Ó
-		            conn = DriverManager.getConnection(DB_URL,USER,PASS);//getConnection·½·¨£¬Á¬½ÓMySQLÊı¾İ¿â
+		            // æ‰“å¼€é“¾æ¥
+		            conn = DriverManager.getConnection(DB_URL,USER,PASS);//getConnectionæ–¹æ³•ï¼Œè¿æ¥MySQLæ•°æ®åº“
 		        
-		            // Ö´ĞĞ²éÑ¯
+		            // æ‰§è¡ŒæŸ¥è¯¢
 		            stmt = conn.createStatement();
 		            String sql;
-		            sql = "SELECT account, number, isLogin£¬isWin FROM lottery";
+		            sql = "SELECT account, number, isLoginï¼ŒisWin FROM lottery";
 		            ResultSet rs = stmt.executeQuery(sql);
-		            // Õ¹¿ª½á¹û¼¯Êı¾İ¿â
+		            // å±•å¼€ç»“æœé›†æ•°æ®åº“
 		            while(rs.next()){
-		                // Í¨¹ı×Ö¶Î¼ìË÷
+		                // é€šè¿‡å­—æ®µæ£€ç´¢
 		            	if(rs.getBoolean("isWin")) {
-		            		label.setText("»ñ½±ÓÃ»§Îª:"+ rs.getString(account));
+		            		label.setText("è·å¥–ç”¨æˆ·ä¸º:"+ rs.getString(account));
 		            	}
 		            }
-		            // Íê³Éºó¹Ø±Õ
+		            // å®Œæˆåå…³é—­
 		            rs.close();
 		            stmt.close();
 		            conn.close();
 		        }catch(SQLException se){
-		            // ´¦Àí JDBC ´íÎó
+		            // å¤„ç† JDBC é”™è¯¯
 		            se.printStackTrace();
 		        }catch(Exception e){
-		            // ´¦Àí Class.forName ´íÎó
+		            // å¤„ç† Class.forName é”™è¯¯
 		            e.printStackTrace();
 		        }finally{
-		            // ¹Ø±Õ×ÊÔ´
+		            // å…³é—­èµ„æº
 		            try{
 		                if(stmt!=null) stmt.close();
 		            }catch(SQLException se2){
-		            }// Ê²Ã´¶¼²»×ö
+		            }// ä»€ä¹ˆéƒ½ä¸åš
 		            try{
 		                if(conn!=null) conn.close();
 		            }catch(SQLException se){
@@ -204,12 +204,12 @@ static class B2 implements ActionListener{
 			}
 	    }
 	    
-	    //ÉèÖÃÖĞ½±¸ÅÂÊ
+	    //è®¾ç½®ä¸­å¥–æ¦‚ç‡
 static class B3 implements ActionListener{
 	public void setRate() {
-    	String rate0 = (String)JOptionPane.showInputDialog("ÇëÉèÖÃ³é½±¸ÅÂÊ");
+    	String rate0 = (String)JOptionPane.showInputDialog("è¯·è®¾ç½®æŠ½å¥–æ¦‚ç‡");
     	Scanner scanner = new Scanner(System.in);
-        // ½ÓÊÕĞÅÏ¢
+        // æ¥æ”¶ä¿¡æ¯
         Administrator.rate = Double.parseDouble(rate0);    
     }
 
@@ -220,7 +220,7 @@ static class B3 implements ActionListener{
 	}
 }
 
-	    //»ñÈ¡ÖĞ½±¸ÅÂÊ
+	    //è·å–ä¸­å¥–æ¦‚ç‡
 static class B4 implements ActionListener{
 	public void getRate() {
     	JOptionPane.showMessageDialog(null, Administrator.rate);
@@ -242,6 +242,104 @@ static class B0 implements ActionListener{
 		// TODO Auto-generated method stub
 		
 	}
+	
+}
+
+@SuppressWarnings("unused")
+//è®¾ç½®æ¦‚ç‡
+private void setrate(double a,double b,double c) {
+	Connection conn = null;//å£°æ˜connectionå¯¹è±¡
+    Statement stmt = null;//åˆ›å»ºstatementç±»å¯¹è±¡ï¼Œç”¨æ¥æ‰§è¡Œsqlè¯­å¥
+    	try {
+            // æ³¨å†Œ JDBC é©±åŠ¨
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        
+            // æ‰“å¼€é“¾æ¥
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);//getConnectionæ–¹æ³•ï¼Œè¿æ¥MySQLæ•°æ®åº“
+        
+            // æ‰§è¡ŒæŸ¥è¯¢
+            stmt = conn.createStatement();
+            String sql;
+            sql = "INSERT INTO setrate(first prize, second prize, third prize) VALUES (?,?,?)";
+			// é¢„å¤„ç†sqlè¯­å¥
+			PreparedStatement presta = conn.prepareStatement(sql);
+			// è®¾ç½®sqlè¯­å¥ä¸­çš„valueså€¼
+			presta.setDouble(1, a);
+			presta.setDouble(2, b);
+			presta.setDouble(3, c);
+			presta.execute();
+			//  æ‰“å°æ³¨å†Œä¿¡æ¯
+		    JOptionPane.showMessageDialog(null, "ä¸€ç­‰å¥–æ¦‚ç‡ï¼š"+a+"äºŒç­‰å¥–æ¦‚ç‡ï¼š"+b+"ä¸‰ç­‰å¥–æ¦‚ç‡ï¼š"+c); 
+		    frame.setVisible(false);
+		
+	    	stmt.close();
+	        conn.close();
+    	}catch(SQLException se){
+	        // å¤„ç† JDBC é”™è¯¯
+	        se.printStackTrace();
+	    }catch(Exception e){
+	        // å¤„ç† Class.forName é”™è¯¯
+	        e.printStackTrace();
+	    }finally{
+	        // å…³é—­èµ„æº
+	        try{
+	            if(stmt!=null) stmt.close();
+	        }catch(SQLException se2){
+	        }// ä»€ä¹ˆéƒ½ä¸åš
+	        try{
+	            if(conn!=null) conn.close();
+	        }catch(SQLException se){
+	            se.printStackTrace();
+	        }
+	    }
+	    	
+}
+public void setimage() {
+	Connection conn = null;//å£°æ˜connectionå¯¹è±¡
+    Statement stmt = null;//åˆ›å»ºstatementç±»å¯¹è±¡ï¼Œç”¨æ¥æ‰§è¡Œsqlè¯­å¥
+    	try {
+            // æ³¨å†Œ JDBC é©±åŠ¨
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            // æ‰“å¼€é“¾æ¥
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);//getConnectionæ–¹æ³•ï¼Œè¿æ¥MySQLæ•°æ®åº“
+        
+            // æ‰§è¡ŒæŸ¥è¯¢
+            stmt = conn.createStatement();
+            String sql;
+            sql = "INSERT INTO img(imgID, imgURL) VALUES (?,?)";
+			// é¢„å¤„ç†sqlè¯­å¥
+			PreparedStatement presta = conn.prepareStatement(sql);
+			// è®¾ç½®sqlè¯­å¥ä¸­çš„valueså€¼
+			
+			//ç”¨æˆ·è¾“å…¥
+			int id = ?.getText();
+			String imageurl = ?.getText();
+			
+			
+			presta.setInt(1, id);
+			presta.setString(2, imageurl);
+			presta.execute();
+
+	    	stmt.close();
+	        conn.close();
+    	}catch(SQLException se){
+	        // å¤„ç† JDBC é”™è¯¯
+	        se.printStackTrace();
+	    }catch(Exception e){
+	        // å¤„ç† Class.forName é”™è¯¯
+	        e.printStackTrace();
+	    }finally{
+	        // å…³é—­èµ„æº
+	        try{
+	            if(stmt!=null) stmt.close();
+	        }catch(SQLException se2){
+	        }// ä»€ä¹ˆéƒ½ä¸åš
+	        try{
+	            if(conn!=null) conn.close();
+	        }catch(SQLException se){
+	            se.printStackTrace();
+	        }
+	    }
 	
 }
 }
