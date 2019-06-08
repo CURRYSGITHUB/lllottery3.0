@@ -1,66 +1,67 @@
 import   java.util.*;
+import java.math.BigDecimal;
 import java.sql.*;
 
 
 public class Play {
-	 // JDBC Çı¶¯Ãû¼°Êı¾İ¿â URL
+	 // JDBC é©±åŠ¨ååŠæ•°æ®åº“ URL
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";  
-    static final String DB_URL = "jdbc:mysql://localhost:3306/test1?serverTimezone=GMT%2B8";//urlÖ¸ÏòÒª·ÃÎÊµÄÊı¾İ¿âÃû
+    static final String DB_URL = "jdbc:mysql://localhost:3306/test1?serverTimezone=GMT%2B8";//urlæŒ‡å‘è¦è®¿é—®çš„æ•°æ®åº“å
  
-    // MySQLÅäÖÃÊ±µÄÓÃ»§ÃûÓëÃÜÂë
+    // MySQLé…ç½®æ—¶çš„ç”¨æˆ·åä¸å¯†ç 
     static final String USER = "root";
     static final String PASS = "123456";
     
 	static int date1 = 0;
-	// ±£´æÊäÈë¿¨ºÅµÄ´ÎÊı
+	// ä¿å­˜è¾“å…¥å¡å·çš„æ¬¡æ•°
     static int cardNumber = 0;
-    //´´½¨¹ÜÀíÔ±¶ÔÏó
+    //åˆ›å»ºç®¡ç†å‘˜å¯¹è±¡
     static Administrator admin = new Administrator();
-    //»ñÈ¡ÖĞ½±¸ÅÂÊ
+    //è·å–ä¸­å¥–æ¦‚ç‡
     static double cjRate = admin.rate;
-    // ³é½±·½·¨
+    // æŠ½å¥–æ–¹æ³•
     public static void userCJ() {
-    	Connection conn = null;//ÉùÃ÷connection¶ÔÏó
-        Statement stmt = null;//´´½¨statementÀà¶ÔÏó£¬ÓÃÀ´Ö´ĞĞsqlÓï¾ä
-    	// ÅĞ¶ÏµÇÂ¼×´Ì¬
+    	Connection conn = null;//å£°æ˜connectionå¯¹è±¡
+        Statement stmt = null;//åˆ›å»ºstatementç±»å¯¹è±¡ï¼Œç”¨æ¥æ‰§è¡Œsqlè¯­å¥
+    	// åˆ¤æ–­ç™»å½•çŠ¶æ€
         if (!User.isLogin) {
-            // Ã»µÇÂ¼ Ö±½Ó½áÊø·½·¨
-            System.out.println("ÇëÏÈµÇÂ¼");
+            // æ²¡ç™»å½• ç›´æ¥ç»“æŸæ–¹æ³•
+            System.out.println("è¯·å…ˆç™»å½•");
             return;
         }
-        // ÅĞ¶ÏÊÇ·ñÊäÈëÕıÈ·
+        // åˆ¤æ–­æ˜¯å¦è¾“å…¥æ­£ç¡®
         if(!isCarNum()) {
-            System.out.println("ÄãÊäÈëµÄ²»ÕıÈ·");
+            System.out.println("ä½ è¾“å…¥çš„ä¸æ­£ç¡®");
             return;
         }
 
-        // Ëæ»úÎå¸öÊı²¢ÇÒÆ´½Ó³É×Ö·û´®´òÓ¡¶ººÅ¸ô¿ª
-        String string = "±¾ÈÕĞÒÔËÊı×Ö:";
+        // éšæœºäº”ä¸ªæ•°å¹¶ä¸”æ‹¼æ¥æˆå­—ç¬¦ä¸²æ‰“å°é€—å·éš”å¼€
+        String string = "æœ¬æ—¥å¹¸è¿æ•°å­—:";
         for (int i = 0; i < 5; i++) {
-            // Ëæ»ú
+            // éšæœº
         	cjRate = 0.5;
         	double x = Math.pow((1-cjRate), 1/5);
         	System.out.print(x);
         	double y = 1/(1-x);
         	//System.out.print(y);
             int num = (int)(Math.random() * y + User.number);
-            // Æ´½Ó
+            // æ‹¼æ¥
             if (i < 4) {
                 string = string + num + ",";
             } else {
                 string = string + num;
             }
-            // ²é¿´ÊÇ·ñÖĞ½±
+            // æŸ¥çœ‹æ˜¯å¦ä¸­å¥–
             if (num == User.number) {
                 User.isWin = true;
                 try{
-                    // ×¢²á JDBC Çı¶¯
+                    // æ³¨å†Œ JDBC é©±åŠ¨
                     Class.forName("com.mysql.cj.jdbc.Driver");
                 
-                    // ´ò¿ªÁ´½Ó
-                    conn = DriverManager.getConnection(DB_URL,USER,PASS);//getConnection·½·¨£¬Á¬½ÓMySQLÊı¾İ¿â
+                    // æ‰“å¼€é“¾æ¥
+                    conn = DriverManager.getConnection(DB_URL,USER,PASS);//getConnectionæ–¹æ³•ï¼Œè¿æ¥MySQLæ•°æ®åº“
                 
-                    // Ö´ĞĞ²éÑ¯
+                    // æ‰§è¡ŒæŸ¥è¯¢
                     stmt = conn.createStatement();
                     String sql;
                     sql = "SELECT account, password, number, isLogin, isWin FROM lottery";
@@ -70,27 +71,27 @@ public class Play {
                    	
                         if(rs.getString("account").contentEquals(User.account)
                        		 &&rs.getString("password").contentEquals(User.password)) {
-                       	 sql="update lottery set isWin=1";//ĞŞ¸ÄµÇÂ¼×´Ì¬
-                       	 stmt.executeUpdate(sql);//Ö´ĞĞSQLÓï¾ä
+                       	 sql="update lottery set isWin=1";//ä¿®æ”¹ç™»å½•çŠ¶æ€
+                       	 stmt.executeUpdate(sql);//æ‰§è¡ŒSQLè¯­å¥
                        	 break;
                         }
                     }
-                    // Íê³Éºó¹Ø±Õ
+                    // å®Œæˆåå…³é—­
                     rs.close();
                     stmt.close();
                     conn.close();
                 }catch(SQLException se){
-                    // ´¦Àí JDBC ´íÎó
+                    // å¤„ç† JDBC é”™è¯¯
                     se.printStackTrace();
                 }catch(Exception e){
-                    // ´¦Àí Class.forName ´íÎó
+                    // å¤„ç† Class.forName é”™è¯¯
                     e.printStackTrace();
                 }finally{
-                    // ¹Ø±Õ×ÊÔ´
+                    // å…³é—­èµ„æº
                     try{
                         if(stmt!=null) stmt.close();
                     }catch(SQLException se2){
-                    }// Ê²Ã´¶¼²»×ö
+                    }// ä»€ä¹ˆéƒ½ä¸åš
                     try{
                         if(conn!=null) conn.close();
                     }catch(SQLException se){
@@ -99,51 +100,188 @@ public class Play {
                 }
             }
         }
-        // ´òÓ¡ÖĞ½±ºÅ
+        // æ‰“å°ä¸­å¥–å·
         System.out.println(string);
-        // ÅĞ¶ÏÊÇ·ñÖĞ½±
+        // åˆ¤æ–­æ˜¯å¦ä¸­å¥–
         if(User.isWin) {
-            System.out.println("¹§Ï²ÖĞ½±");
+            System.out.println("æ­å–œä¸­å¥–");
         } else {
-            System.out.println("ºÜÒÅº¶£¬ÄúÎ´ÖĞ½±");
+            System.out.println("å¾ˆé—æ†¾ï¼Œæ‚¨æœªä¸­å¥–");
         }
     }
 
-    // ÊäÈë¿¨ºÅ·½·¨
+    // è¾“å…¥å¡å·æ–¹æ³•
     public static boolean isCarNum() {
     	
-    	//»ñÈ¡µ±Ç°ÏµÍ³ÈÕÆÚ
+    	//è·å–å½“å‰ç³»ç»Ÿæ—¥æœŸ
         Calendar c = Calendar.getInstance();
         int date2 = c.get(Calendar.DATE);
         if(date1!=date2) {
-        	System.out.println("ÇëÊäÈë¿¨ºÅ:");
+        	System.out.println("è¯·è¾“å…¥å¡å·:");
         	@SuppressWarnings("resource")
         	Scanner scanner = new Scanner(System.in);
-        	// ½ÓÊÕ
+        	// æ¥æ”¶
         	String carNum = scanner.nextLine();
-        	// ×ªintÀàĞÍ
+        	// è½¬intç±»å‹
         	int num = Integer.parseInt(carNum);
-        	// ½øĞĞ±È¶Ô
+        	// è¿›è¡Œæ¯”å¯¹
         	if (User.number == num) {
-        		// Æ¥ÅäÕıÈ·
-        		System.out.println("¿¨ºÅÊäÈëÕıÈ·");
+        		// åŒ¹é…æ­£ç¡®
+        		System.out.println("å¡å·è¾“å…¥æ­£ç¡®");
         		return true;
         	} else {
-        		//Æ¥Åä²»ÕıÈ·
+        		//åŒ¹é…ä¸æ­£ç¡®
         		cardNumber++;
-        		System.out.println("ÊäÈë»¹Ê£" + (3 - cardNumber) + "´Î");
+        		System.out.println("è¾“å…¥è¿˜å‰©" + (3 - cardNumber) + "æ¬¡");
         		if (cardNumber != 3) {
         			isCarNum();
         		} else {
-        			System.out.println("3´Î»ú»áÓÃÍê");
-        			// ÊäÈë¿¨ºÅ´ÎÊıÖØÖÃ
+        			System.out.println("3æ¬¡æœºä¼šç”¨å®Œ");
+        			// è¾“å…¥å¡å·æ¬¡æ•°é‡ç½®
         			cardNumber = 0;
-        			date1 = date2;//±ÜÃâµÚËÄ´ÎÊäÈë
+        			date1 = date2;//é¿å…ç¬¬å››æ¬¡è¾“å…¥
         		}
         		return false;
         	}
         }
         return false;
     }
+
+	public void cjtest() {
+		Connection conn = null;//å£°æ˜connectionå¯¹è±¡
+	    Statement stmt = null;//åˆ›å»ºstatementç±»å¯¹è±¡ï¼Œç”¨æ¥æ‰§è¡Œsqlè¯­å¥
+	    String imgurl1 =null;
+	    String imgurl2 =null;
+	    String imgurl3 =null;
+	    String imgurl4 =null;
+	        try{
+            // æ³¨å†Œ JDBC é©±åŠ¨
+	            Class.forName("com.mysql.cj.jdbc.Driver");
+	        
+	            // æ‰“å¼€é“¾æ¥
+	            conn = DriverManager.getConnection(DB_URL,USER,PASS);//getConnectionæ–¹æ³•ï¼Œè¿æ¥MySQLæ•°æ®åº“
+	        
+	            // æ‰§è¡ŒæŸ¥è¯¢
+	            stmt = conn.createStatement();
+	            String sql;
+	            sql = "SELECT imgID, imgURL FROM img";
+	            ResultSet rs = stmt.executeQuery(sql);
+	            // å±•å¼€ç»“æœé›†æ•°æ®åº“
+	            while(rs.next()){
+	                // é€šè¿‡å­—æ®µæ£€ç´¢
+	            	if(rs.getInt("imgID")==1) {
+	            		 imgurl1 = rs.getString("imgURL");
+	            	}
+	            	else if(rs.getInt("imgID")==2){
+	            		 imgurl2 = rs.getString("imgURL");
+	            	}
+	            	else if(rs.getInt("imgID")==3){
+	            		 imgurl3 = rs.getString("imgURL");
+	            	}
+	            	else if(rs.getInt("imgID")==4){
+	            		 imgurl4 = rs.getString("imgURL");
+	            	}
+	            	
+	            }
+	            // å®Œæˆåå…³é—­
+	            rs.close();
+	            stmt.close();
+	            conn.close();
+	        }catch(SQLException se){
+	            // å¤„ç† JDBC é”™è¯¯
+	            se.printStackTrace();
+	        }catch(Exception e){
+	            // å¤„ç† Class.forName é”™è¯¯
+	            e.printStackTrace();
+	        }finally{
+	            // å…³é—­èµ„æº
+	            try{
+	                if(stmt!=null) stmt.close();
+	            }catch(SQLException se2){
+	            }// ä»€ä¹ˆéƒ½ä¸åš
+	            try{
+	                if(conn!=null) conn.close();
+	            }catch(SQLException se){
+	                se.printStackTrace();
+	            }
+	        }
+	    
+
+	        gocj(imgurl1 ,imgurl2,imgurl3);
+        
+	}
+	public void gocj(String a,String b,String c) {
+		double frate = 0.00;
+		double srate = 0.00;
+		double trate = 0.00;
+		Connection conn = null;//å£°æ˜connectionå¯¹è±¡
+	    Statement stmt = null;//åˆ›å»ºstatementç±»å¯¹è±¡ï¼Œç”¨æ¥æ‰§è¡Œsqlè¯­å¥
+	    if (!User.isLogin) {
+            // æ²¡ç™»å½• ç›´æ¥ç»“æŸæ–¹æ³•
+            System.out.println("è¯·å…ˆç™»å½•");
+            return;
+        }
+        // åˆ¤æ–­æ˜¯å¦è¾“å…¥æ­£ç¡®
+        if(!isCarNum()) {
+            System.out.println("ä½ è¾“å…¥çš„ä¸æ­£ç¡®");
+            return;
+        }
+		try {
+            // æ³¨å†Œ JDBC é©±åŠ¨
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        
+            // æ‰“å¼€é“¾æ¥
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);//getConnectionæ–¹æ³•ï¼Œè¿æ¥MySQLæ•°æ®åº“
+        
+            // æ‰§è¡ŒæŸ¥è¯¢
+            stmt = conn.createStatement();
+            String sql;
+            sql = "SELECT first prize, second prize, third prize FROM setrate";
+            ResultSet rs = stmt.executeQuery(sql);
+            
+            while(rs.next()){
+               	 frate = rs.getDouble("first prize");
+               	 srate = rs.getDouble("second prize");
+               	 trate = rs.getDouble("third prize");
+               	 stmt.executeUpdate(sql);//æ‰§è¡ŒSQLè¯­å¥
+            }
+            // å®Œæˆåå…³é—­
+            rs.close();
+            stmt.close();
+            conn.close();
+        }catch(SQLException se){
+            // å¤„ç† JDBC é”™è¯¯
+            se.printStackTrace();
+        }catch(Exception e){
+            // å¤„ç† Class.forName é”™è¯¯
+            e.printStackTrace();
+        }finally{
+            // å…³é—­èµ„æº
+            try{
+                if(stmt!=null) stmt.close();
+            }catch(SQLException se2){
+            }// ä»€ä¹ˆéƒ½ä¸åš
+            try{
+                if(conn!=null) conn.close();
+            }catch(SQLException se){
+                se.printStackTrace();
+            }
+        }
+      //å¼€å§‹æŠ½å¥–
+      //ç¡®å®šæ¯ä¸ªæ¦‚ç‡çš„èŒƒå›´
+	        int fprize = (int)(frate*1000);
+	        int sprize = (int)(srate*1000);
+	        int tprize = (int)(trate*1000);
+		 if((Math.random() * 1001 + 1000)<(1000+fprize)) {
+	        	//ä¸­ä¸€ç­‰å¥– è°ƒå‡ºidä¸º1çš„å›¾ç‰‡ åœ°å€ä¸º imgurl1ï¼›
+		    	
+	        }
+	        else if((Math.random() * 1001 + 1000)>(1000+fprize)&&(Math.random() * 1001 + 1000)<(1000+fprize+sprize)){
+	        	//ä¸­äºŒç­‰å¥– è°ƒå‡ºidä¸º1çš„å›¾ç‰‡ åœ°å€ä¸º imgurl2ï¼›
+	        }
+	        else if((Math.random() * 1001 + 1000)>(1000+fprize+sprize)&&(Math.random() * 1001 + 1000)<(1000+fprize+sprize+tprize)) {
+	        	//ä¸­ä¸‰ç­‰å¥– è°ƒå‡ºidä¸º1çš„å›¾ç‰‡ åœ°å€ä¸º imgurl3ï¼›
+	        }
+	}
 }
-	
+
