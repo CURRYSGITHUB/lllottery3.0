@@ -169,6 +169,7 @@ public class Login {
              		} else {
              			// 登录失败
              			JOptionPane.showMessageDialog(null, "账户或密码错误，今日机会已用完");
+				Start.cjStart();
             			// 重置记录登录次数的变量
              			// 输入卡号次数重置
              			date1 = date2;//避免第四次输入
