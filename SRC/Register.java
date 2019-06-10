@@ -118,7 +118,7 @@ public class Register {
 	            	clearText();
 	            }else {
 	            	// 设置SQL规则，数据由于还不知道先用？代替
-	    			sql = "INSERT INTO lottery(account,password,isLogin,ftimes,stimes,ttimes) VALUES (?,?,?,?,?)";
+	    			sql = "INSERT INTO lottery(account,password,isLogin,ftimes,stimes,ttimes) VALUES (?,?,?,?,?,?)";
 	    			// 预处理sql语句
 	    			PreparedStatement presta = conn.prepareStatement(sql);
 	    			// 设置sql语句中的values值
