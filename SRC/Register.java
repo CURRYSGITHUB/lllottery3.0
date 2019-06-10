@@ -9,6 +9,8 @@ public class Register {
 	static JLabel laccount,lpassword,lpassword2,ltitle;
 	static JTextField taccount;
 	static JPasswordField tpassword,tpassword2;
+	static ImageIcon bgImage = new ImageIcon("C:/Users/Damien/Desktop/bg.jpg");
+	static JLabel bgLabel = new JLabel(bgImage);
 	
 	public static void userRegister(){
 		frame = new JFrame();
@@ -34,11 +36,21 @@ public class Register {
         tpassword.setFont(font1);
         tpassword2.setFont(font1);
         
-		frame.setBounds(100, 100, 1000, 800);
+		frame.setSize(950, 750);
+		frame.setLocationRelativeTo(null);
+		bgLabel.setBounds(0, 0, frame.getWidth(), frame.getHeight());
+		// 把内容窗格转化为JPanel，否则不能用方法setOpaque()来使内容窗格透明
+		JPanel imagePanel = (JPanel) frame.getContentPane();
+		imagePanel.setOpaque(false);
+		// 把背景图片添加到分层窗格的最底层作为背景
+		frame.getLayeredPane().add(bgLabel, new Integer(Integer.MIN_VALUE));
+		frame.setResizable(false);
+        
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);//将布局管理器置为空
         frame.setVisible(true);
         frame.setTitle("注册");
+        
         
         register.setBounds(500, 500, 232, 57);
         register.setBackground(Color.ORANGE);
@@ -82,20 +94,18 @@ public class Register {
 	        if(m.equals(n)) {
 	        	User.password = n;
 	        }
-			User.number = (int)(Math.random() * 1001 + 1000);
 	        User.isLogin = false;
-	        User.isWin = false;
 	        int k = 0;
 	        // 存储到数据库
-	        final String DB_URL = "jdbc:mysql://localhost:3306/test1?serverTimezone=GMT%2B8";
+	        final String DB_URL = "jdbc:mysql://localhost:3306/world?serverTimezone=GMT%2B8";
 		    final String USER = "root";
-		    final String PASS = "123456";
+		    final String PASS = "1315202benny";
 		    
 		    try {
 				// 获取数据库的连接
 				Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
 				Statement stmt = conn.createStatement();
-				String sql = "SELECT account, password, number, isLogin, isWin FROM lottery";
+				String sql = "SELECT account, password, isLogin FROM lottery";
 	            ResultSet rs = stmt.executeQuery(sql);
 	            
 	            while(rs.next()){
@@ -108,19 +118,20 @@ public class Register {
 	            	clearText();
 	            }else {
 	            	// 设置SQL规则，数据由于还不知道先用？代替
-	    			sql = "INSERT INTO lottery(account,password,number,isLogin,isWin) VALUES (?,?,?,?,?)";
+	    			sql = "INSERT INTO lottery(account,password,isLogin,ftimes,stimes,ttimes) VALUES (?,?,?,?,?)";
 	    			// 预处理sql语句
 	    			PreparedStatement presta = conn.prepareStatement(sql);
 	    			// 设置sql语句中的values值
 	    			presta.setString(1, User.account);
 	    			presta.setString(2, User.password);
-	    			presta.setInt(3, User.number);
-	    			presta.setBoolean(4, User.isLogin);
-	    			presta.setBoolean(5, User.isWin );
+	    			presta.setBoolean(3, User.isLogin);
+	    			presta.setInt(4, 0);
+	    			presta.setInt(5, 0);
+	    			presta.setInt(6, 0);
 	    			// 执行SQL语句，实现数据添加
 	    			presta.execute();
 	    			//  打印注册信息
-	    		    JOptionPane.showMessageDialog(null, "注册成功！\n用户名："+User.account+"\n抽奖号码："+User.number); 
+	    		    JOptionPane.showMessageDialog(null, "注册成功！\n用户名："+User.account); 
 	    		    frame.setVisible(false);
 			    Start.frame.setVisible(true);
 	            }
